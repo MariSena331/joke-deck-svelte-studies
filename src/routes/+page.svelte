@@ -22,7 +22,7 @@
     }
 </script>
 
-<h1>Welcome to your library project</h1>
+<h1>Chuck Norris Jokes</h1>
 <div>
     {#each categories as c}
         <button onclick={() => handleCategoryFilter(c)}>{c}</button>
