@@ -1,21 +1,29 @@
 <script lang="ts">
     import { getFilteredCategory } from "$lib/api/getFilteredCategory.ts";
+    import { getJokeSearch } from "$lib/api/getJokeSearch.ts";
+
+    import type { Joke } from "$lib/types/Joke.ts";
 
     type Data = { categories: string[] };
-    type Joke = { id: string; created_at: Date; icon_url: string; updated_at: Date; url: string; value: string } | null;
 
     const { data } = $props<{ data: Data }>();
     const { categories } = data;
 
     let filteredCategory = $state<Joke>(null);
+    let searchedTerms = $state<Joke[]>([]);
 
     const handleCategoryFilter = async (category: string) => {
         filteredCategory = await getFilteredCategory(category);
     }
+
+    const handleSearch = async (e: any) => {
+        const r = await getJokeSearch(e.target.value);
+        searchedTerms = r.result;
+    }
 </script>
 
 <h1>Welcome to your library project</h1>
-<ul>
+<div>
     {#each categories as c}
         <button onclick={() => handleCategoryFilter(c)}>{c}</button>
     {/each}
@@ -25,4 +33,15 @@
             <img src={filteredCategory.icon_url} alt="n sei"/>
         </div>
     {/if}
-</ul>
+</div>
+<div>
+    <input onchange={(e) => handleSearch(e)} placeholder="Search joke..." />
+</div>
+{#if searchedTerms && searchedTerms.length > 0}
+    <div>
+        <h3>Search results:</h3>
+        {#each searchedTerms as searchResultItem}
+            <ul><li>{searchResultItem?.value}</li></ul>
+        {/each}
+    </div>
+{/if}
