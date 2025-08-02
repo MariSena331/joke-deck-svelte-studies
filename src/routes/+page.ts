@@ -1,3 +1,3 @@
 import { getCategories } from '$lib/api/getCategories.js';
 
-export const load = async ({ fetch }) => ({ categories: await getCategories() });
+export const load = async () => ({ categories: await getCategories() });
