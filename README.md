@@ -9,10 +9,10 @@ Chuck Norris Jokes API (sem auth). Endpoints que você vai usar:
 - GET `/jokes/search?query={term}`
 
 ### Requisitos funcionais
-- [] Listar categorias em um menu lateral fixo.
+- [X] Listar categorias em um menu lateral fixo.
 - Buscar piadas por:
-    - [] Categoria (clique em uma categoria → carrega piada random da categoria).
-    - [] Texto livre (input → usa /search com paginação).
+    - [X] Categoria (clique em uma categoria → carrega piada random da categoria).
+    - [...] Texto livre (input → usa /search com paginação).
 - Favoritos:
     - [] Botão “⭐ Favoritar” em cada piada.
     - [] Lista “Favoritos” com remoção.
