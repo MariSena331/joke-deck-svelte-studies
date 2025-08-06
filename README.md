@@ -1,5 +1,6 @@
 # Desafio: Svelte: “JokeDeck” com Chuck Norris API
 Objetivo: um app SPA com busca, filtros e favoritos persistidos.
+https://www.notion.so/Svelte-242d07fbcd4c805fb8b2cc8c8eba8232
 
 ### API escolhida
 Chuck Norris Jokes API (sem auth). Endpoints que você vai usar:
@@ -12,7 +13,7 @@ Chuck Norris Jokes API (sem auth). Endpoints que você vai usar:
 - [X] Listar categorias em um menu lateral fixo.
 - Buscar piadas por:
     - [X] Categoria (clique em uma categoria → carrega piada random da categoria).
-    - [...] Texto livre (input → usa /search com paginação).
+    - [X] Texto livre (input → usa /search com paginação).
 - Favoritos:
     - [] Botão “⭐ Favoritar” em cada piada.
     - [] Lista “Favoritos” com remoção.

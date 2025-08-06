@@ -13,6 +13,8 @@
     let searchedTerms = $state<Joke[]>([]);
     let paginationLength = $state<number>(0);
     let pages = $derived(Array.from({ length: Math.ceil(paginationLength)}, (_, i) => i));
+    let currentPage = $state(1);
+    const itensPerPage = $derived(searchedTerms.slice((currentPage - 1) * 10, currentPage * 10));
 
     const handleCategoryFilter = async (category: string) => {
         filteredCategory = await getFilteredCategory(category);
@@ -23,6 +25,7 @@
         searchedTerms = r.result;
         paginationLength = r.total / 10;
     }
+
 </script>
 
 <h1>Chuck Norris Jokes</h1>
@@ -43,13 +46,13 @@
 {#if searchedTerms && searchedTerms.length > 0}
     <div>
         <h3>Search results:</h3>
-        {#each searchedTerms as searchResultItem}
-            <ul><li>{searchResultItem?.value}</li></ul>
+        {#each itensPerPage as item}
+            <ul><li>{item?.value}</li></ul>
         {/each}
     </div>
 {/if}
 {#if paginationLength > 0}
     {#each pages as page}
-        <button onclick={() => console.log(`Página ${page}`)}>{page + 1}</button>
+        <button onclick={() => currentPage = page + 1}>{page + 1}</button>
     {/each}
 {/if}
