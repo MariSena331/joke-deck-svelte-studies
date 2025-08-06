@@ -12,7 +12,7 @@
     let filteredCategory = $state<Joke>(null);
     let searchedTerms = $state<Joke[]>([]);
     let paginationLength = $state<number>(0);
-    let pages = $derived(Array.from({ length: Math.round(paginationLength) + 1}, (_, i) => i));
+    let pages = $derived(Array.from({ length: Math.ceil(paginationLength)}, (_, i) => i));
 
     const handleCategoryFilter = async (category: string) => {
         filteredCategory = await getFilteredCategory(category);
