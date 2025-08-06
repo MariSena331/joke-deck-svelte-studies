@@ -8,9 +8,10 @@
 
     const { data } = $props<{ data: Data }>();
     const { categories } = data;
-
+    
     let filteredCategory = $state<Joke>(null);
     let searchedTerms = $state<Joke[]>([]);
+    let paginationLendth = $state<number>(0);
 
     const handleCategoryFilter = async (category: string) => {
         filteredCategory = await getFilteredCategory(category);
@@ -19,6 +20,7 @@
     const handleSearch = async (e: any) => {
         const r = await getJokeSearch(e.target.value);
         searchedTerms = r.result;
+        paginationLendth = r.total / 10;
     }
 </script>
 
@@ -30,7 +32,7 @@
     {#if filteredCategory}
         <div>
             <p>{filteredCategory.value}</p>
-            <img src={filteredCategory.icon_url} alt="n sei"/>
+            <img src={filteredCategory.icon_url} alt="joke icon"/>
         </div>
     {/if}
 </div>
