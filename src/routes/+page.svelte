@@ -11,7 +11,8 @@
     
     let filteredCategory = $state<Joke>(null);
     let searchedTerms = $state<Joke[]>([]);
-    let paginationLendth = $state<number>(0);
+    let paginationLength = $state<number>(0);
+    let pages = $derived(Array.from({ length: Math.round(paginationLength) + 1}, (_, i) => i));
 
     const handleCategoryFilter = async (category: string) => {
         filteredCategory = await getFilteredCategory(category);
@@ -20,7 +21,7 @@
     const handleSearch = async (e: any) => {
         const r = await getJokeSearch(e.target.value);
         searchedTerms = r.result;
-        paginationLendth = r.total / 10;
+        paginationLength = r.total / 10;
     }
 </script>
 
@@ -46,4 +47,9 @@
             <ul><li>{searchResultItem?.value}</li></ul>
         {/each}
     </div>
+{/if}
+{#if paginationLength > 0}
+    {#each pages as page}
+        <button onclick={() => console.log(`Página ${page}`)}>{page + 1}</button>
+    {/each}
 {/if}
